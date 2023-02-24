@@ -13,9 +13,6 @@
 A engenharia de Software vai gerenciar todo o processo de desenvolvimento e manutenção do produto. O foco está no planejamento e organização dos recursos, obejtivo, riscos e premissas que envolvem o projeto, procurando o equilibrio entre custo, tempo e escopo, para que os mesmo não interfiram na qualidade do produto.
 A relação entre programação e engenharia de software está na utilização, a engenharia de software utiliza a programação como ferramenta para a criação dos produto e alcançe dos objtivos.
 
-Tempo - As coisa vão mudar, manter, pensamento a longo prazo
-escala -  Capcidade de crescimento
-trade-off - Negociações
 
 ### 2- O que são requisitos? 
 Requisitos são objetivos, comportamentos ou propriedades que um produto deve atender. É através dos requisitos que entendemos qual é foco do produto, alinhando objetivos, expectativas e necessidade. 
