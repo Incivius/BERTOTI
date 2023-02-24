@@ -17,7 +17,7 @@ A relação entre programação e engenharia de software está na utilização, 
 ### 2- O que são requisitos? 
 Requisitos são objetivos, comportamentos ou propriedades que um produto deve atender. É através dos requisitos que entendemos qual é foco do produto, alinhando objetivos, expectativas e necessidade. 
  > 2.1 - Requistos funcionais
- Requisitos funcionais são os objetivos ou necessidades que o software deverá solucionar atráves de suas funções ou serviços. (Necessidade do cliente) - Exemplos: Funcionalidades
+ Requisitos funcionais são os objetivos ou necessidades que o software deverá solucionar atráves de suas funções ou serviços. (Necessidade do cliente) - Exemplos: Funcionalidades.
  > 2.2 - Requisitos Não funcionais
  Requisitos não funcionais está relacionado a forma com que o projeto/produtos deve acontecer. Ele estabele parametros que não estão completamente ligado a um objetivo ou necessidade, mas a qualidade o usabilidade do que estpa sendo contruido. Exemplos: Escalabilidade, manutenção e segurança
  > 2.3 - Dê 2 exemplos de trade-off em requisitos não funcionais? 
