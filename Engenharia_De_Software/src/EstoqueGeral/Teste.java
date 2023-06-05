@@ -1,7 +1,5 @@
 package EstoqueGeral;
 import org.junit.jupiter.api.Test;
-
-import Jopege2.Menu;
 import junit.framework.TestCase;
 
 public class Teste extends TestCase {
@@ -10,23 +8,23 @@ public class Teste extends TestCase {
 	public void test() {
 		
 		Estoque etq = new Estoque();
-		Localização Local = new Localização(2,1);
-		Menu menu = new Menu();
+		Localização local = new Localização(2,1);
+		Fabricante marca = new Fabricante();
+		Categoria catego = new Categoria("Uso diario");
 	
-		assertEquals(Local.getAndar(),1);
-		assertEquals(Local.getRua(),2);
+		assertEquals(local.getAndar(),1);
+		assertEquals(local.getRua(),2);
 		
-		etq.addProduto(new Produto("Coador", "pano", 1, 3.20));
+		etq.addProduto(new Produto("Coador", "pano", 1, 3.20, catego, local, marca));
 		assertEquals(etq.getProdutos().size(), 1);
 		
-		etq.addProduto(new Produto("Sabonete", "Cheiro de maçã", 12, 0.9));
-		assertEquals(etq.getProdutos().size(), 2);
-		
-		Local.setAndar(3);
-		assertEquals(Local.getAndar(),3);
+		local.setAndar(3);
+		assertEquals(local.getAndar(),3);
 
-		Local.setRua(7);
-		assertEquals(Local.getRua(),7);
+		local.setRua(7);
+		assertEquals(local.getRua(),7);
+
+		assertEquals(etq.buscarNomeProdutos("Coador"), 1);
 		
 		assertEquals(1, 1);
 	

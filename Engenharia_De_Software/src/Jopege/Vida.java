@@ -1,4 +1,4 @@
-package Jopege2;
+package Jopege;
 
 public class Vida {
 	private double valor = 1000;

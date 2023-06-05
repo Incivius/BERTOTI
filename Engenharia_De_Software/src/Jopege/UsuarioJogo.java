@@ -1,5 +1,5 @@
-package Jopege2;
-//import java.util.ArrayList;
+package Jopege;
+
 
 public class UsuarioJogo {
 	private Arquetipo arquetipo;

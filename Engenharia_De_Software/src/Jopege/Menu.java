@@ -1,8 +1,5 @@
-package Jopege2;
+package Jopege;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import Jopege.Usuario;
 
 public class Menu {
 	static private ArrayList<Habilidade> habs = new ArrayList<Habilidade>();

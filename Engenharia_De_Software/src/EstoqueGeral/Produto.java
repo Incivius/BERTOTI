@@ -6,17 +6,17 @@ public class Produto {
 	int códigoProduto;
 	Double preço;
 	Categoria catego;
-	Localização Local;
-	Fabricante Marca;
+	Localização local;
+	Fabricante marca;
 
-public Produto(String nomeProduto,  String descrição, int códigoProduto, double preço){
+public Produto(String nomeProduto,  String descrição, int códigoProduto, double preço, Categoria catego, Localização local, Fabricante marca){
     this.nomeProduto = nomeProduto;
     this.descrição = descrição;
     this.códigoProduto = códigoProduto;
     this.preço = preço;
-    
-    
-
+    this.catego = catego;
+    this.local = local;
+    this.marca = marca;
 }
 
 public String getNomeProduto(){
@@ -25,17 +25,17 @@ public String getNomeProduto(){
 public void setNomePorduto(String nomeProduto){
     this.nomeProduto = nomeProduto;
 }
-public String getDescrição(){
+public String getDescricao(){
     return descrição;
 }
-public void setDescrição(String descrição){
+public void setDescricao(String descrição){
     this.descrição = descrição;
 }
 
-public int getCódigoProduto(){
+public int getCodigoProduto(){
     return códigoProduto;
 }
-public void setCódigoProduto(int códigoProduto){
+public void setCodigoProduto(int códigoProduto){
     this.códigoProduto = códigoProduto;
 }
 public double getPreço(){
@@ -44,7 +44,23 @@ public double getPreço(){
 public void setPreço(double preço){
     this.preço = preço;
 }
-
- 
+public Categoria getCategoria(){
+    return catego;
+}
+public void setCategoria(Categoria catego){
+    this.catego = catego;
+}
+public Localização getLocal(){
+    return local;
+}
+public void setLocal(Localização local){
+    this.local = local;
+}
+public Fabricante getMarca(){
+    return marca;
+}
+public void setMarca(Fabricante marca){
+    this.marca = marca;
+}
 
 }

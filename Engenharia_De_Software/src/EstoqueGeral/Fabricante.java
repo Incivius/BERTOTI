@@ -5,6 +5,8 @@ public class Fabricante {
     public Fabricante(String fabricante){
         this.fabricante = fabricante;
     }
+    public Fabricante(){
+    }
     public void setFabricante(String fabricante){
         this.fabricante = fabricante;
     }

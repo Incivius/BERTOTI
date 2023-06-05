@@ -1,4 +1,4 @@
-package Jopege2;
+package Jopege;
 
 //import java.util.ArrayList;
 //import java.util.LinkedList;
