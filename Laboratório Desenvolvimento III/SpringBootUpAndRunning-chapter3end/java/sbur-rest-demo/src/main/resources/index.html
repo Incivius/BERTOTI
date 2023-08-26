@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head> 
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width", initial-scale="1.0">
         <title> My world - Marquinhos</title>
@@ -8,8 +8,26 @@
 
     </head>
     <body>
-        <h1> Lista de Cafés</h1>
-        <ul id="coffees-list"> </ul>
+        <h1> Escolha sua carta</h1>
+        <div class="cartas-container">
+            <!-- Cada carta é um elemento div com a classe "carta" -->
+            <div class="carta">
+                <div class="conteudo-frente">
+                    <!-- Conteúdo da frente da carta -->
+                    <div class="imagem-carta">
+                        <!-- A imagem da carta ficará aqui -->
+                    </div>
+                    <div class="texto-carta">
+                        <!-- Campos de texto personalizáveis, como nome, descrição, tipo e habilidades -->
+                    </div>
+                </div>
+                <div class="conteudo-verso">
+                    <!-- Conteúdo do verso da carta -->
+                </div>
+            </div>
+            <!-- Repita para cada carta -->
+        </div>
+        
 
     </body>
     <script src = "index.js"> </script>

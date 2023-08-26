@@ -23,7 +23,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+			<dependência>
+  <groupId>junto</groupId>
+  <artifactId>junto</artifactId>
+  <version>4.13.2</version>
+</dependência>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
