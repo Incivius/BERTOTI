@@ -6,10 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
         data.forEach(coffee => {
             const carta = document.createElement("div");
             carta.classList.add("carta");
-
             const frente = document.createElement("div");
             frente.classList.add("conteudo-frente");
-
             const imagemCarta = document.createElement("div");
             imagemCarta.classList.add("imagem-carta");
             imagemCarta.style.backgroundImage = `url(${coffee.imagePath})`;
@@ -27,12 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const verso = document.createElement("div");
             verso.classList.add("conteudo-verso");
-            verso.innerHTML = `
-                <h2>${coffee.nome}</h2>
-                <p>${coffee.descrição}</p>
-                <p><strong>Tipo:</strong> ${coffee.tipo}</p>
-                <p><strong>Habilidades:</strong> ${coffee.hab}</p>
-            `;
+            // verso.innerHTML = `
+            //     <h2>${coffee.nome}</h2>
+            //     <p>${coffee.descrição}</p>
+            //     <p><strong>Tipo:</strong> ${coffee.tipo}</p>
+            //     <p><strong>Habilidades:</strong> ${coffee.hab}</p>
+            // `;
 
             carta.appendChild(frente);
             carta.appendChild(verso);
