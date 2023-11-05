@@ -18,70 +18,98 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.thehecklers.sburrestdemo.model.Card;
+import com.thehecklers.sburrestdemo.model.Experiencia;
 import com.thehecklers.sburrestdemo.model.Habilidade;
+import com.thehecklers.sburrestdemo.model.Perfil;
+import com.thehecklers.sburrestdemo.model.Projeto;
 
 @SpringBootApplication
 public class SburRestDemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SburRestDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SburRestDemoApplication.class, args);
+    }
 
 }
-@CrossOrigin(origins = {"http://localhost:8070", "http://127.0.0.1:5500"})
+
+@CrossOrigin(origins = { "http://localhost:8070", "http://127.0.0.1:5500" })
 @RestController
-@RequestMapping("/coffees")
+@RequestMapping("/perfis")
 class RestApiDemoController {
-	private List<Card> cartas = new ArrayList<>();
+    private List<Perfil> perfis = new ArrayList<>();
 
-	public RestApiDemoController() {
-		cartas.addAll(List.of( new Card("25743537.jpg","1","Cachorro caramelo", "Uma combinação unica de amor, carinho, malandragem e loucura, coisa de brasilehiro né? ", "É do Tipo amor", new Habilidade(40,50,80,90,20,40)),
-			new Card("bolsonaro-hang-moto.jpg","2","Dois caras em uma moto", "Você não quer encontrar esse monstro na rua a noite", "É do tipo Loucura", new Habilidade(50,80,90,20,40,40)),
-			new Card("download.jpg","3", "Lampião", "Dalhe peixada", "É do tipo Ataque", new Habilidade(80,90,20,40,40,50))));
-	}
+    public RestApiDemoController() {
 
-	@GetMapping
-	Iterable<Card> getCarta() {
-		return cartas;
-	}
+        List<String> tagsProjeto = new ArrayList<>();
+        tagsProjeto.add("Java");
 
-	@GetMapping("/{id}")
-	Optional<Card> getCardById(@PathVariable String id) {
-		for (Card c: cartas) {
-			if (c.getId().equals(id)) {
-				return Optional.of(c);
-			}
-		}
+        // Criando a experiência
+        Experiencia experiencia = new Experiencia();
+        experiencia.setNome("Nome da Experiência");
+        experiencia.setDataInicio(2020);
+        experiencia.setDurationMeses(12);
+        experiencia.setDescricao("Descrição da Experiência");
 
-		return Optional.empty();
-	}
+        // Criando a habilidade
+        List<String> habilidades = new ArrayList<>();
+        habilidades.add("Comunicação");
+        Habilidade habilidade = new Habilidade();
+        habilidade.setHabilidade((ArrayList<String>) habilidades);
+        habilidade.setDescricao("Descrição da Habilidade");
 
-	@PostMapping
-	Card postCard(@RequestBody Card carta) {
-		cartas.add(carta);
-		return carta;
-	}
+        // Criando o projeto
+        Projeto projeto = new Projeto();
+        projeto.setNome("Nome do Projeto");
+        projeto.setLink("Link do Projeto");
+        projeto.setImagePath("Caminho da Imagem");
+        projeto.setTagsStack((ArrayList<String>) tagsProjeto);
+        projeto.setDescricao("Descrição do Projeto");
 
-	@PutMapping("/{id}")
-	ResponseEntity<Card> putCoffee(@PathVariable String id,
-	@RequestBody Card carta) {
-		int cardIndex = -1;
+        // Criando o perfil
+        perfis.addAll(List.of(new Perfil("Seu Nome", "23/06/2001", "Informações sobre você", "seu@email.com",
+                projeto, experiencia, habilidade)));
 
-		for (Card c: cartas) {
-			if (c.getId().equals(id)) {
-				cardIndex = cartas.indexOf(c);
-				cartas.set(cardIndex, carta);
-			}
-		}
+    }
 
-		return (cardIndex == -1) ?
-				new ResponseEntity<>(postCard(carta), HttpStatus.CREATED) :
-				new ResponseEntity<>(carta, HttpStatus.OK);
-	}
+    @GetMapping
+    Iterable<Perfil> getPerfis() {
+        return perfis;
+    }
 
-	@DeleteMapping("/{id}")
-	void deleteCoffee(@PathVariable String id) {
-		cartas.removeIf(c -> c.getId().equals(id));
-	}
+    @GetMapping("/{id}")
+    Optional<Perfil> getPerfilById(@PathVariable String id) {
+        for (Perfil perfil : perfis) {
+            if (perfil.getNome().equals(id)) {
+                return Optional.of(perfil);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @PostMapping
+    Perfil postPerfil(@RequestBody Perfil perfil) {
+        perfis.add(perfil);
+        return perfil;
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<Perfil> putPerfil(@PathVariable String id, @RequestBody Perfil perfil) {
+        int perfilIndex = -1;
+
+        for (Perfil p : perfis) {
+            if (p.getNome().equals(id)) {
+                perfilIndex = perfis.indexOf(p);
+                perfis.set(perfilIndex, perfil);
+            }
+        }
+
+        return (perfilIndex == -1) ? new ResponseEntity<>(postPerfil(perfil), HttpStatus.CREATED)
+                : new ResponseEntity<>(perfil, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    void deletePerfil(@PathVariable String id) {
+        perfis.removeIf(p -> p.getNome().equals(id));
+    }
 }

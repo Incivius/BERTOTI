@@ -1,4 +1,4 @@
-package main.java.com.thehecklers.sburrestdemo.model;
+package com.thehecklers.sburrestdemo.model;
 
 public class Experiencia {
     private String nome;

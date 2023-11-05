@@ -1,19 +1,23 @@
-package main.java.com.thehecklers.sburrestdemo.model;
-import java.util.Date;
-import main.java.com.thehecklers.sburrestdemo.model.Experiencia;
-import main.java.com.thehecklers.sburrestdemo.model.Habilidade;
-import main.java.com.thehecklers.sburrestdemo.model.Projeto;
+package com.thehecklers.sburrestdemo.model;
 
 public class Perfil {
     private String nome;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String sobre;
     private String email;
     private Projeto projeto;
     private Experiencia experiencia;
     private Habilidade habilidade;
 
-    public Perfil() {
+    public Perfil(String nome, String dataNascimento, String sobre, String email, Projeto projeto,
+            Experiencia experiencia, Habilidade habilidade) {
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.sobre = sobre;
+        this.email = email;
+        this.projeto = projeto;
+        this.experiencia = experiencia;
+        this.habilidade = habilidade;
     }
 
     public String getNome() {
@@ -24,11 +28,11 @@ public class Perfil {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

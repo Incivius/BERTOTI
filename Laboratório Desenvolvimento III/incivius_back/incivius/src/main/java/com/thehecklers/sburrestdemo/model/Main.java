@@ -1,6 +1,6 @@
 package com.thehecklers.sburrestdemo.model;
 
-public class Jogo {
+public class Main {
 
 	public static void main(String[] args) {
 	
