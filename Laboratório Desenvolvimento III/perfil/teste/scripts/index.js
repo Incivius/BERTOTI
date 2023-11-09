@@ -1,5 +1,5 @@
 // Fazendo uma solicitação GET para a API
-const URL_DA_API = 'http://localhost:8070/perfis'
+const URL_DA_API = 'http://localhost:8080/perfis'
 fetch(URL_DA_API)
     .then(response => response.json())
     .then(data => {
@@ -15,11 +15,12 @@ fetch(URL_DA_API)
 
             // Preenchendo informações do projeto
             const projetoCard = document.getElementById('projeto-card');
+            const tecnologias = projeto.tagsStack.map(tag => `<span class="tag">${tag}</span>`);
             projetoCard.innerHTML = `
                 <p><strong>Nome do Projeto:</strong> ${projeto.nome}</p>
                 <p><strong>Link do Projeto:</strong> <a href="${projeto.link}" target="_blank">${projeto.link}</a></p>
                 <p><strong>Descrição do Projeto:</strong> ${projeto.descricao}</p>
-                <p><strong>Tecnologias:</strong> ${projeto.tagsStack.join(', ')}</p>
+                <p><strong>Tecnologias:</strong> ${tecnologias.join(', ')}</p>
             `;
 
             // Preenchendo informações de experiência

@@ -1,6 +1,7 @@
 package com.thehecklers.sburrestdemo.model;
 
 public class Perfil {
+    private int id;
     private String nome;
     private String dataNascimento;
     private String sobre;
@@ -9,8 +10,9 @@ public class Perfil {
     private Experiencia experiencia;
     private Habilidade habilidade;
 
-    public Perfil(String nome, String dataNascimento, String sobre, String email, Projeto projeto,
+    public Perfil(int id, String nome, String dataNascimento, String sobre, String email, Projeto projeto,
             Experiencia experiencia, Habilidade habilidade) {
+        this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.sobre = sobre;
@@ -19,6 +21,14 @@ public class Perfil {
         this.experiencia = experiencia;
         this.habilidade = habilidade;
     }
+        public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public String getNome() {
         return nome;

@@ -45,10 +45,10 @@ class RestApiDemoController {
 
         // Criando a experiência
         Experiencia experiencia = new Experiencia();
-        experiencia.setNome("Nome da Experiência");
-        experiencia.setDataInicio(2020);
-        experiencia.setDurationMeses(12);
-        experiencia.setDescricao("Descrição da Experiência");
+        experiencia.setNome("Desenvolvedor Full stack");
+        experiencia.setDataInicio(2023);
+        experiencia.setDurationMeses(0);
+        experiencia.setDescricao("Trabalho freelancer com desenvolvimento python e node.js");
 
         // Criando a habilidade
         List<String> habilidades = new ArrayList<>();
@@ -59,14 +59,15 @@ class RestApiDemoController {
 
         // Criando o projeto
         Projeto projeto = new Projeto();
-        projeto.setNome("Nome do Projeto");
-        projeto.setLink("Link do Projeto");
-        projeto.setImagePath("Caminho da Imagem");
+        projeto.setNome("Api 3");
+        projeto.setLink("https://github.com/projetoKhali/api3");
+        projeto.setImagePath("../incivius_back\\incivius\\src\\main\\java\\com\\thehecklers\\sburrestdemo\\resources\\image\\Api.png");
         projeto.setTagsStack((ArrayList<String>) tagsProjeto);
         projeto.setDescricao("Descrição do Projeto");
 
         // Criando o perfil
-        perfis.addAll(List.of(new Perfil("Seu Nome", "23/06/2001", "Informações sobre você", "seu@email.com",
+        perfis.addAll(List.of(new Perfil(1, "Marcos Malaquias", "23/06/2001",
+                "Fala sozinho, tem TDHA, fuma maconha e escuta Dua lipa", "mviniciusMalaquias@gmail.com",
                 projeto, experiencia, habilidade)));
 
     }

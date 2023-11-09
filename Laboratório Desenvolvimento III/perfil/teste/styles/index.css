@@ -16,3 +16,11 @@
 .card {
     background-color: #fff;
 }
+
+.tag {
+  background-color: yellow; /* Cor de fundo */
+  border: 1px solid red; /* Borda vermelha com 1 pixel de largura */
+  padding: 2px; /* Espaçamento interno para a borda */
+  margin: 2px; /* Espaçamento externo */
+  display: inline-block; /* Torna as tags em linha uma após a outra */
+}
