@@ -61,7 +61,6 @@ class RestApiDemoController {
         Projeto projeto = new Projeto();
         projeto.setNome("Api 3");
         projeto.setLink("https://github.com/projetoKhali/api3");
-        projeto.setImagePath("../incivius_back\\incivius\\src\\main\\java\\com\\thehecklers\\sburrestdemo\\resources\\image\\Api.png");
         projeto.setTagsStack((ArrayList<String>) tagsProjeto);
         projeto.setDescricao("Descrição do Projeto");
 
@@ -80,7 +79,7 @@ class RestApiDemoController {
     @GetMapping("/{id}")
     Optional<Perfil> getPerfilById(@PathVariable String id) {
         for (Perfil perfil : perfis) {
-            if (perfil.getNome().equals(id)) {
+            if (perfil.getEmail().equals(id)) {
                 return Optional.of(perfil);
             }
         }

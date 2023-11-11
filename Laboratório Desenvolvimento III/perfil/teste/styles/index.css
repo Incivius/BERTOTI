@@ -1,26 +1,76 @@
+body {
+    background-color: #000000;
+    margin: 0;
+    font-family: FreeMono, monospace;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    background-color: #000000;
+    border-radius: 10px; /* Aumentei o raio para tornar as bordas mais arredondadas */
+    box-shadow: 0 0 50px rgba(5, 204, 38, 0.1);
 }
 
-.info-card, .card {
-    background-color: #f0f0f0;
+h1, h2{
+    color: rgb(65, 204, 0);
+    position: relative;
+    text-align: center;
+}
+h1{
+    text-shadow: 2px 2px rgba(243, 241, 241, 0.493)
+}
+
+form > div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    max-width: 750px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    box-sizing: border-box;
+    font-family: FreeMono, monospace; /* Aplicando a fonte ao texto das entradas */
 }
 
-.card {
-    background-color: #fff;
+.button {
+    background: #06c216;
+    border-radius: 8px; /* Aumentei o raio para tornar as bordas mais arredondadas */
+    padding: 15px;
+    cursor: pointer;
+    color: #030303;
+    border: none;
+    font-size: 16px;
+    font-family: FreeMono, monospace; /* Aplicando a fonte ao texto do botão */
 }
 
-.tag {
-  background-color: yellow; /* Cor de fundo */
-  border: 1px solid red; /* Borda vermelha com 1 pixel de largura */
-  padding: 2px; /* Espaçamento interno para a borda */
-  margin: 2px; /* Espaçamento externo */
-  display: inline-block; /* Torna as tags em linha uma após a outra */
+.button:hover {
+    background-color: #080a9e;
+}
+
+p {
+    color: #ffffff;
+    margin: 10px;
+}
+
+div {
+    border: 1px solid #07f57e;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(164, 248, 178, 0.1);
+}
+
+label, input, textarea {
+    margin-right: 15px;
+    margin-left: 15px;
 }

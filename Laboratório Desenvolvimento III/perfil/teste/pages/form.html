@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/index.css">
+    <title>Cadastro de Perfil</title>
+</head>
+
+<body>
+    <div class="container">
+        <form id="perfilForm">
+            <h1>Crie seu Perfil</h1>
+            <div>
+                <h2> Informe seus dados pessoais</h2>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="text" id="dataNascimento" name="dataNascimento" required>
+
+                <label for="sobre">Fale um pouco sobre você:</label>
+                <textarea id="sobre" name="sobre" required></textarea>
+
+                <label for="email">Seu email:</label>
+                <input type="text" id="email" name="email" required>
+
+            </div>
+            <div>
+                <h2>Apresente seu projeto</h2>
+                <label for="nomeProjeto">Nome do projeto:</label>
+                <input type="text" id="nomeProjeto" name="nomeProjeto" required>
+
+                <label for="linkProjeto">Link do projeto:</label>
+                <input type="text" id="linkProjeto" name="linkProjeto" required>
+
+                <label for="descricaoProjeto">Descrição do Projeto:</label>
+                <textarea id="descricaoProjeto" name="descricaoProjeto" required></textarea>
+
+                <label for="tecnologias">Tecnologias:</label>
+                <input type="text" id="tecnologias" name="tecnologias" required>
+            </div>
+
+            <div>
+                <h2>Fale um pouco sobre sas experiências</h2>
+                <label for="nomeExperiencia">Nome da Experiência:</label>
+                <input type="text" id="nomeExperiencia" name="nomeExperiencia" required>
+
+                <label for="duracaoExperiencia">Duração (meses):</label>
+                <input type="text" id="duracaoExperiencia" name="duracaoExperiencia" required>
+
+                <label for="dataInicioExperiencia">Data de Início:</label>
+                <input type="text" id="dataInicioExperiencia" name="dataInicioExperiencia" required>
+
+                <label for="descricaoExperiencia">Descrição da Experiência:</label>
+                <textarea id="descricaoExperiencia" name="descricaoExperiencia" required></textarea>
+            </div>
+
+            <div>
+                <h2>Mencione suas habilidades: </h2>
+                <label for="habilidades">Habilidades:</label>
+                <input type="text" id="habilidades" name="habilidades" required>
+
+                <label for="descricaoHabilidade">Descrição da Habilidade:</label>
+                <textarea id="descricaoHabilidade" name="descricaoHabilidade" required></textarea>
+            </div>
+
+            <button type="submit" class="button">Cadastrar Perfil</button>
+        </form>
+    </div>
+
+    <script src="../scripts/cadastro.js"></script>
+</body>
+
+</html>

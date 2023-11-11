@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Projeto {
     private String nome;
     private String link;
-    private String imagePath;
     private ArrayList<String> tagsStack;
     private String descricao;
 
@@ -26,14 +25,6 @@ public class Projeto {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public ArrayList<String> getTagsStack() {
