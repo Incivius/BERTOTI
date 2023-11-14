@@ -1,11 +1,9 @@
 package com.thehecklers.sburrestdemo.model;
 
-import java.util.ArrayList;
-
 public class Projeto {
     private String nome;
     private String link;
-    private ArrayList<String> tagsStack;
+    private String tagsStack;
     private String descricao;
 
     public Projeto() {
@@ -27,11 +25,11 @@ public class Projeto {
         this.link = link;
     }
 
-    public ArrayList<String> getTagsStack() {
+    public String getTagsStack() {
         return tagsStack;
     }
 
-    public void setTagsStack(ArrayList<String> tagsStack) {
+    public void setTagsStack(String tagsStack) {
         this.tagsStack = tagsStack;
     }
 

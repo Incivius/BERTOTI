@@ -1,8 +1,7 @@
 package com.thehecklers.sburrestdemo.model;
-import java.util.ArrayList;
 
 public class Habilidade {
-    private ArrayList<String> habilidade;
+    private String habilidade;
     private String descricao;
 
     public Habilidade() {
@@ -11,11 +10,11 @@ public class Habilidade {
 
     // Métodos Getters e Setters
 
-    public ArrayList<String> getHabilidade() {
+    public String getHabilidade() {
         return habilidade;
     }
 
-    public void setHabilidade(ArrayList<String> habilidade) {
+    public void setHabilidade(String habilidade) {
         this.habilidade = habilidade;
     }
 

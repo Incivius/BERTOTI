@@ -51,21 +51,19 @@ class RestApiDemoController {
         experiencia.setDescricao("Trabalho freelancer com desenvolvimento python e node.js");
 
         // Criando a habilidade
-        List<String> habilidades = new ArrayList<>();
-        habilidades.add("Comunicação");
         Habilidade habilidade = new Habilidade();
-        habilidade.setHabilidade((ArrayList<String>) habilidades);
+        habilidade.setHabilidade("Comunicação");
         habilidade.setDescricao("Descrição da Habilidade");
 
         // Criando o projeto
         Projeto projeto = new Projeto();
         projeto.setNome("Api 3");
         projeto.setLink("https://github.com/projetoKhali/api3");
-        projeto.setTagsStack((ArrayList<String>) tagsProjeto);
+        projeto.setTagsStack("Java");
         projeto.setDescricao("Descrição do Projeto");
 
         // Criando o perfil
-        perfis.addAll(List.of(new Perfil(1, "Marcos Malaquias", "23/06/2001",
+        perfis.addAll(List.of(new Perfil("Marcos Malaquias", "23/06/2001",
                 "Fala sozinho, tem TDHA, fuma maconha e escuta Dua lipa", "mviniciusMalaquias@gmail.com",
                 projeto, experiencia, habilidade)));
 

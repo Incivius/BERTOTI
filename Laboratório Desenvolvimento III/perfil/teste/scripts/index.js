@@ -1,10 +1,9 @@
-// Fazendo uma solicitação GET para a API
-const URL_DA_API = 'http://localhost:8080/perfis'
+const URL_DA_API = 'http://localhost:8080/perfis';
+
 fetch(URL_DA_API)
     .then(response => response.json())
     .then(data => {
-        // Verifique se a matriz de dados não está vazia
-        if (Array.isArray(data) && data.length > 0) {
+        if (data && data.length > 0) {
             const { nome, dataNascimento, sobre, email, projeto, experiencia, habilidade } = data[0];
 
             // Preenchendo informações pessoais
@@ -15,12 +14,11 @@ fetch(URL_DA_API)
 
             // Preenchendo informações do projeto
             const projetoCard = document.getElementById('projeto-card');
-            const tecnologias = projeto.tagsStack.map(tag => `<span class="tag">${tag}</span>`);
             projetoCard.innerHTML = `
                 <p><strong>Nome do Projeto:</strong> ${projeto.nome}</p>
                 <p><strong>Link do Projeto:</strong> <a href="${projeto.link}" target="_blank">${projeto.link}</a></p>
                 <p><strong>Descrição do Projeto:</strong> ${projeto.descricao}</p>
-                <p><strong>Tecnologias:</strong> ${tecnologias.join(', ')}</p>
+                <p><strong>Tecnologias:</strong> ${projeto.tagsStack}</p>
             `;
 
             // Preenchendo informações de experiência
@@ -35,7 +33,7 @@ fetch(URL_DA_API)
             // Preenchendo informações de habilidade
             const habilidadeCard = document.getElementById('habilidade-card');
             habilidadeCard.innerHTML = `
-                <p><strong>Habilidade:</strong> ${habilidade.habilidade.join(', ')}</p>
+                <p><strong>Habilidade:</strong> ${habilidade.habilidade}</p>
                 <p><strong>Descrição da Habilidade:</strong> ${habilidade.descricao}</p>
             `;
         } else {

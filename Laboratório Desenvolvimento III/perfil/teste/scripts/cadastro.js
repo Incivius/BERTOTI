@@ -31,16 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     nome: nomeProjeto,
                     link: linkProjeto,
                     descricao: descricaoProjeto,
-                    tagsStack: tecnologias.split(',').map(tag => tag.trim()),
+                    tagsStack: tecnologias,
                 },
                 experiencia: {
                     nome: nomeExperiencia,
-                    durationMeses: parseInt(duracaoExperiencia), // Converta para número, se necessário
+                    durationMeses: duracaoExperiencia,
                     dataInicio: dataInicioExperiencia,
                     descricao: descricaoExperiencia,
                 },
                 habilidade: {
-                    habilidade: habilidades.split(',').map(habilidade => habilidade.trim()),
+                    habilidade: habilidades,
                     descricao: descricaoHabilidade,
                 },
             };
