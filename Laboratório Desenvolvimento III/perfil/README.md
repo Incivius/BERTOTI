@@ -75,7 +75,7 @@ curl -X GET http://localhost:8080/perfis?email=usuario@email.com
 
 > `Criar` um Novo Perfil
 
-```bash
+```json
 curl -X POST -H "Content-Type: application/json" -d '{
   "nome": "Nome do Usuário",
   "dataNascimento": "01/01/2000",
@@ -104,7 +104,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 > `Atualizar` Perfil por E-mail
 
-```bash
+```json
 curl -X PUT -H "Content-Type: application/json" -d '{
   "nome": "Novo Nome",
   "dataNascimento": "02/02/2002",
