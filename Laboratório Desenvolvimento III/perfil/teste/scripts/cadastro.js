@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await response.json();
             console.log('Perfil cadastrado com sucesso:', data);
             // Redirecione para a página de exibição do perfil ou faça outras ações necessárias
-            window.location.href = 'pagina_de_exibicao_do_perfil.html';
+            window.location.href = `index.html?email=${email}`;
         } catch (error) {
             console.error('Erro ao cadastrar perfil:', error);
             // Adicione lógica de tratamento de erros, como exibição de mensagem de erro para o usuário

@@ -1,6 +1,12 @@
+const urlParams = new URLSearchParams(window.location.search);
+const email = urlParams.get('email');
+
 const URL_DA_API = 'http://localhost:8080/perfis';
 
-fetch(URL_DA_API)
+// Adiciona o e-mail à URL
+const urlCompleta = `${URL_DA_API}/?email=${encodeURIComponent(email)}`;
+
+fetch(urlCompleta)
     .then(response => response.json())
     .then(data => {
         if (data && data.length > 0) {
