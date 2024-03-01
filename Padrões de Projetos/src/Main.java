@@ -1,3 +1,5 @@
+public class Main {
+
 public static void main(String[] args) {
     
     CalculoIngressoAnti calculadora = new CalculoIngressoAnti();
@@ -25,4 +27,6 @@ public static void main(String[] args) {
 
     calculadoraIngresso.setCalculadora(new CalculadoraPrecoEstudante());
     System.out.println("Preço do ingresso para estudante: R$" + calculadoraIngresso.calcularPrecoIngresso(20));
+}
+
 }
