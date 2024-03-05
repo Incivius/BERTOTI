@@ -3,12 +3,12 @@ package observer.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stock {
+public class ObserverStock {
     private String symbol;
     private double price;
-    private List<Investor> investors = new ArrayList<>();
+    private List<ObserverInvestor> investors = new ArrayList<>();
 
-    public Stock(String symbol, double price) {
+    public ObserverStock(String symbol, double price) {
         this.symbol = symbol;
         this.price = price;
     }
@@ -26,16 +26,16 @@ public class Stock {
         return price;
     }
 
-    public void attach(Investor investor) {
+    public void attach(ObserverInvestor investor) {
         investors.add(investor);
     }
 
-    public void detach(Investor investor) {
+    public void detach(ObserverInvestor investor) {
         investors.remove(investor);
     }
 
     private void notifyInvestors() {
-        for (Investor investor : investors) {
+        for (ObserverInvestor investor : investors) {
             investor.update(this);
         }
     }
