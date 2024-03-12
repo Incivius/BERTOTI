@@ -1,6 +1,6 @@
 package observer.Pattern;
 
-public class ObserverInvestor {
+public class ObserverInvestor implements StockObserver{
     private String name;
 
     public ObserverInvestor(String name) {
