@@ -6,8 +6,6 @@ import observer.Pattern.ObserverStock;
 public class Main {
 
 public static void main(String[] args) {
-
-    // Anti Strategy
     
     CalculoIngressoAnti calculadora = new CalculoIngressoAnti();
 
@@ -24,8 +22,6 @@ public static void main(String[] args) {
         System.out.println("Preço do ingresso para adulto: R$" + precoAdulto);
         System.out.println("Preço do ingresso para estudante: R$" + precoEstudante);
 
-    // Strategy
-
     CalculadoraIngresso calculadoraIngresso = new CalculadoraIngresso();
 
         calculadoraIngresso.setCalculadora(new CalculadoraPrecoCrianca());
@@ -38,8 +34,6 @@ public static void main(String[] args) {
         System.out.println("Preço do ingresso para estudante: R$" + calculadoraIngresso.calcularPrecoIngresso(20));
 
 
-    // Anti Observer
-
     Stock appleStock = new Stock("AAPL", 150.0);
         
         Investor investor1 = new Investor("John");
@@ -49,8 +43,6 @@ public static void main(String[] args) {
         
         investor1.update(appleStock);
         investor2.update(appleStock);
-
-    // Observer
 
     ObserverStock appleStockObserver = new ObserverStock("AAPL", 150.0);
         
