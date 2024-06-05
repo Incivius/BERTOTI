@@ -36,7 +36,7 @@ public class ObserverStock {
 
     private void notifyInvestors() {
         for (ObserverInvestor investor : investors) {
-            investor.update(this);
+            investor.update(this.price);
         }
     }
 }
