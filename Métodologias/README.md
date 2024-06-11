@@ -17,7 +17,7 @@ Sou uma pessoa criativa, resiliente e analítica, escolhi a área de tecnologia 
 Parceiro academico: `2RP`
 Back-end: `Java`
 Front-end: `React`
-Banco de dados: `Postgres` 
+Banco de dados: `Postgres`
 
 A aplicação Khali 3 é uma API Java web para o gerenciamento de horas extras e sobreavisos. Seu principal objetivo é controlar os apontamentos/solicitações de horas extras e sobreavisos realizados pelos colaboradores. Além disso, o sistema interpreta essas solicitações, direcionando-as aos responsáveis pela aprovação ou recusa. Caso aprovadas, o sistema realiza cálculos para determinar a quantidade de horas a serem pagas para cada colaborador, com base na parametrização configurada pelo setor de recursos humanos.
 
@@ -29,68 +29,26 @@ A aplicação Khali 3 é uma API Java web para o gerenciamento de horas extras e
 
 ### Contribuições Individuais
 
-Dentro do sistema eu atuei de forma fullstack contribundo desde a modelagem do banco até as estilizações do front-end. 
+#### Sistema de notificações
 
-Banco de dados:
- - Contribui com a modelagem dos banco definindo as relações, criando as tabelas e constraints. Dentre as demandas, um se destaca, a tabela `notification`, uma tabela que gerenciava as notificações dos usuario, para avisar sempre que uma solicitação havia sido atualizado. A principio iriamos utilizar um banco Nosql, mas por questões de tempo optamos por utilizar um banco relacional mas com o objetivo de reduzir ao maximos o uso de recursos do banco.
- - 
-<br>
+Para que o software funcionasse de forma eficiente, era necessário a implementação de um sistema de notificações. Assim, sempre que um colaborador realizasse um apontamento, seu gestor seria notificado, e vice-versa: quando um gestor validasse um apontamento, o colaborador receberia uma notificação. Eu fiquei resposavél pelo desenvolvimento de todo esse sistema.
+
+A solução que pensamos para essa funcionalidade era:
+
+- Ao fazer uma solicitação, um novo registro era criado na tabela `notifications`, associando o seu apontamento ao seu gestor;
+
+- Assim que seu gestor entra na aba de notificações ou na tela de aprovações, a notificação muda de status, assim a notificação ficará oculta pois o gestor já foi notificado;
+
+- Assim que o gestor valida a solicitação, aprovando ou recusando, a tabela de notificações também é atualizada e a notificação ganha um novo status, mas dessa vez ela aparece para o solicitando, notificando que seu apontamento foi atualizado.
+
+- Ao vizualizar a notificação, um gatilho deleta aquele registro no banco, assim poupando armazenamento.
 
 <details>
-<summary> Alguns exemplo do que foi desenvolvido:  </summary>
 
+<summary> Banco de Dados</summary>
+<br>
 
 ```sql
-
-DROP TABLE IF EXISTS clients CASCADE;
-CREATE TABLE IF NOT EXISTS clients(
-    clt_id SERIAL PRIMARY KEY,
-    "name" VARCHAR(255),
-    cnpj VARCHAR(255) UNIQUE,
-    insert_date TIMESTAMP DEFAULT now(),
-    expire_date TIMESTAMP
-);
-
-
-DROP TABLE IF EXISTS users CASCADE;
-CREATE TABLE IF NOT EXISTS users(
-    usr_id SERIAL PRIMARY KEY,
-    registration VARCHAR(255) UNIQUE NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    user_type User_type DEFAULT 'Employee',
-    email VARCHAR(255) UNIQUE NOT NULL,
-    "password" VARCHAR(255) NOT NULL,
-    insert_date TIMESTAMP DEFAULT now(),
-    expire_date TIMESTAMP
-);
-
-DROP TABLE IF EXISTS appointments CASCADE;
-CREATE TABLE IF NOT EXISTS appointments(
-    apt_id SERIAL PRIMARY KEY,
-    start_date TIMESTAMP check (start_date < end_date) NOT NULL,
-    end_date TIMESTAMP check (end_date > start_date) NOT NULL,
-    usr_id INT,
-    clt_id INT,
-    rc_id INT,
-    prj_id INT,
-    appointment_type Apt_type NOT NULL,
-    justification VARCHAR(255),
-    status Apt_status DEFAULT 'Pending',
-    insert_date TIMESTAMP DEFAULT now(),
-    apt_updt_id INT NULL,
-    feedback VARCHAR(255),
-
-    CONSTRAINT usr_id_fk FOREIGN KEY
-    (usr_id) REFERENCES users(usr_id),
-    CONSTRAINT clt_id_fk FOREIGN KEY
-    (clt_id) REFERENCES clients(clt_id),
-    CONSTRAINT rc_id_fk FOREIGN KEY
-    (rc_id) REFERENCES result_centers(rc_id),
-    CONSTRAINT apt_updt_fk FOREIGN KEY
-    (apt_updt_id) REFERENCES appointments(apt_id),
-    CONSTRAINT prj_id_fk FOREIGN KEY (prj_id) REFERENCES projects(prj_id)
-);
-
 DROP TABLE IF EXISTS notifications CASCADE;
 CREATE TABLE IF NOT EXISTS notifications (
     apt_id INT PRIMARY KEY,
@@ -102,30 +60,19 @@ CREATE TABLE IF NOT EXISTS notifications (
     CONSTRAINT fk_usr_id FOREIGN KEY
     (usr_id) REFERENCES users(usr_id)
 );
-
 ```
 <br>
+
 </details>
 
-<br>
-
- Back-end:
- - No back-and eu pude atuar em todas as camadas da aplicação: Criando as entity, repository, service e controllers das tabelas e objetos `user`, `appoinment` e `client`, uma das minhas melhores contribuições e mais complicadas foi a entidade `notification`:
-
-
-Aqui temos a entidade criada conforme a tabela no banco. Cada apontamento solicitado no sistema deve gerar uma notificação para o responsavél por aquele colaborador, assim ele obtem a aprovação ou recusa, facilitando a gestão e acompanhamento das solicitações. Nesse contexto nossa aplicação possui 4 atributos:
-- aptId: Id do apontamento referente a essa notificação;
-- userId: Id do usario que deverá aprovar essa notificação;
-- status: status da notificação, se já foi visualizada ou não;
-- AppointmentStatus: Status do apontamento referente a essa notificação.
+Optei por utilizar um banco relacional por conta do tenmpo disponivél para entregar essa tarefa e por já ter um domino com banco relacionais.
 
 <details>
-<summary> Código </summary>
+
+<summary> Entity </summary>
+<br>
 
 ```java
-
-//Entity
- 
 @Entity
 @Table(name = "notifications")
 @AllArgsConstructor
@@ -150,39 +97,18 @@ public class Notification {
     @Column(name = "type")
     private AppointmentStatus type;
 
-}
-
-// Repository
-
-@RepositoryRestResource
-public interface NotificationRepository extends JpaRepository<Notification, Long> {
-
-}
-
- ```
+```
 <br>
+
 </details>
 
-Como as notificações funcionava:
-
-1 - Ao fazer uma solicitação, um novo registro era criado na tabela notificações, associando o seu apontamento ao seu gestor;
-
-2 - Assim que seu gestor entra na aba de notificações ou na tela de aprovações, a notificação muda de status, assim a notificação ficará oculta pois o gestor já foi notificado;
-
-3 - Assim que o gestor atualização sua solicitação, aprovando ou recusando, a tabela de notificações também é atualizada e a notificação ganha um novo status, mas dessa vez ela aparece para o solicitando, notificando que seu apontamento foi atualizado.
-
-4 - Ao vizualizar a notificação, um gatilho deleta aquele registro no banco, assim poupando armazenamento. 
-
 <details>
-<summary> Código </summary>
 
+<summary> Service </summary>
+<br>
 
 ```java
-// Como a notification estava muito ligada ao appoinments, optamos por deixar um unico service e incluir o notification
-
-// Service
-
-    @Query(value = "SELECT * FROM appointments a WHERE a.usr_id = :usr_id", nativeQuery = true)
+   @Query(value = "SELECT * FROM appointments a WHERE a.usr_id = :usr_id", nativeQuery = true)
     List<Appointment> findAppointmentByUser(@Param("usr_id") Long userId);
 
     @Query(value = "select * from appointments where rc_id in ( select rc_id from result_centers where gst_id = :usr_id) and status = 'Pending'", nativeQuery = true)
@@ -232,11 +158,19 @@ Como as notificações funcionava:
         "AND status = false AND (type = 'Rejected' OR type = 'Approved')",
         nativeQuery = true)
     long countFalseRejectedOrApprovedNotifications(@Param("usr_id") Long userId);
+```
 
+<br>
 
-// Controller
+</details>
 
-    @Transactional
+<details>
+
+<summary> Contreller </summary>
+<br>
+
+```java
+  @Transactional
     @PostMapping
     public Appointment createAppointment(@RequestBody Appointment appointment) {
         Appointment savedAppointment = appointmentRepository.save(appointment);
@@ -303,27 +237,86 @@ Como as notificações funcionava:
         appointmentRepository.updateStatusToTrueForUser(usr_id);
     }
 ```
+
 <br>
+
 </details>
-
-Front-end
-
-Para o front nos trabalhamos a componentização, onde criamos componentes modulares e genericos, associando conteudo conforme o contexto. Entre as principais colaborações seria os dashboard, graficos e a mensageria:
 
 <details>
 
-<summary> </summary>
+<summary> Componente notification ts </summary>
+<br>
 
-```tsx
+```ts
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { NotificationItem } from '../services/AppointmentService';
+
+interface NotificationPopUpProps {
+    notificationItems: NotificationItem[];
+    loadNotifications?: () => void;
+}
+
+export default function NotificationPopUp({ notificationItems, loadNotifications }: NotificationPopUpProps) {
+    const [collapsed, setCollapsed] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
+    const toggleCollapsed = () => {
+        setCollapsed(!collapsed);
+        if (!loaded && loadNotifications) {
+            loadNotifications();
+            setLoaded(true);
+        }
+    };
+
+    return (
+        <div className={`notification ${notificationItems.length === 0 ? 'hidden' : ''}`}>
+            <div>
+                <button onClick={toggleCollapsed}>
+                    {collapsed ? 'Expandir' : 'X'}
+                </button>
+                {!collapsed && notificationItems.length > 0 && (
+                    <ul>
+                        {notificationItems.map((item, index) => (
+                            <li key={index}>
+                                <Link to={item.url}>{item.label}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        </div>
+    );
+}
+```
+
+<br>
+
+</details>
+
+#### Dashboard gerencial
+
+Desenvolvi o principal dashboard da aplicação, uma interface visual para a análise dos administradores, contendo todos os dados de todas as solicitações, status e responsáveis. Além disso, inclui filtros para facilitar a gestão e gráficos com alguns indicadores importantes.
+
+
+
+<details>
+
+<summary> Page dashboard </summary>
+<br>
+
+```ts
+import "flatpickr/dist/themes/airbnb.css";
 import { useEffect, useState } from 'react';
 import BarChartDays from '../components/BarChartDaysOfMonth';
 import BarChartHours from '../components/BarChartHoursOfDay';
 import Filter from '../components/Filter';
 import PieChart from '../components/PieChart';
 import { AppointmentSchema } from '../schemas/Appointment';
-import { UserSchema } from '../schemas/User';
-import { getAppointmentsUser } from '../services/AppointmentService';
+import { UserSchema } from "../schemas/User";
+import { getAppointmentsAdm } from '../services/AppointmentService';
 import "../styles/dashboard.css";
+import "../styles/filters.css";
 
 interface AppointmentsProps {
     userLoggedIn: UserSchema;
@@ -343,9 +336,8 @@ export default function Appointments({ userLoggedIn }: AppointmentsProps) {
         "endDate": "",
     });
 
-
     const requestAppointments = () => {
-        getAppointmentsUser(userLoggedIn.id)
+        getAppointmentsAdm()
             .then(appointmentsResponse => {
                 setAppointments(appointmentsResponse);
                 applyFilters(filterValues, appointmentsResponse);
@@ -354,6 +346,7 @@ export default function Appointments({ userLoggedIn }: AppointmentsProps) {
 
     useEffect(() => {
         requestAppointments();
+
     }, []);
 
     const handleFilterChange = (filterType: string, filterValue: any) => {
@@ -388,12 +381,11 @@ export default function Appointments({ userLoggedIn }: AppointmentsProps) {
                         const filterStartDate = new Date(filterValue);
                         const appointmentStartDate = new Date(appointment.startDate);
                         /* Compare the dates without considering time components */
-                        return filterStartDate.setHours(0, 0, 0, 0) <= appointmentStartDate.setHours(0, 0, 0, 0);
+                        return appointmentStartDate.setHours(0, 0, 0, 0) >= filterStartDate.setHours(0, 0, 0, 0);
                     case "endDate":
                         const filterEndDate = new Date(filterValue);
                         const appointmentEndDate = new Date(appointment.endDate);
-                        /* Compare the dates without considering time components */
-                        return filterEndDate.setHours(0, 0, 0, 0) >= appointmentEndDate.setHours(0, 0, 0, 0);
+                        return appointmentEndDate.setHours(0, 0, 0, 0) <= filterEndDate.setHours(0, 0, 0, 0);
                     default:
                         return true;
 
@@ -463,38 +455,96 @@ export default function Appointments({ userLoggedIn }: AppointmentsProps) {
 
 ```
 
+<br>
+
 </details>
 
-Scrum Master
+#### Extração de relatórios
 
- - Responsavél pelo criacão do Backlog das sprint;
- - Responsavél pelo gerenciamento das tarefas;
- - Criação e acompanhamento do Burndown;
- - Mediador das reuniões;
- - Facilitador da equipe;
-
+Nessa funcionalidade, o objetivo era disponibilizar ao usuário um arquivo CSV contendo todos os dados dos apontamentos, além disso, o usuário poderia filtrar as colunas para retornar apenas as desejadas. Fiquei responsável pela construção do serviço no front-end, que iria lidar com a requisição GET, passando como parâmetro as colunas desejadas.
 
 <details>
-<summary> Código </summary>
+
+<summary> Service jsx</summary>
 <br>
+
+```jsx
+import axios from 'axios';
+
+const API_URL = 'http://127.0.0.1:8080/csv-export';
+
+export async function getReport(
+    camposBoolean: boolean[],
+    usrId: number
+) {
+    const camposBooleanString = camposBoolean.map(value => value.toString()).join(',');
+
+    const params = {
+        camposBoolean: camposBooleanString,
+        usr_id: usrId,
+    };
+
+    try {
+        const response = await axios.get(API_URL, { params });
+        return response.data;
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+        throw error;
+    }
+}
+
+```
+
+<br>
+
 </details>
 
-Desenvolvimento Front-end
+##### Contruibuições adicionais
 
- - Criação das principais telas da aplicação;
- - Criação dos compontentes;
- - Configuração das routas dentro do componente principal (Home)
+**Desenvolvimento Front-End**
 
-Desenvolvimento Back-end
+- **Criação das Principais Telas da Aplicação:** Contribuí para o desenvolvimento das principais interfaces de usuário, garantindo uma experiência intuitiva e responsiva.
+- **Criação dos Componentes:** Colaborei na estruturação e implementação de componentes reutilizáveis, promovendo a modularidade e a consistência visual.
+- **Configuração das Rotas:** Ajudei na configuração das rotas dentro do componente principal (Home), assegurando a navegação fluida e a integração entre diferentes partes da aplicação.
 
- - Criação dos endopoint
- - Criação das funções
+**Desenvolvimento Back-End**
 
-Documentação
- - Responsavél pela contrução do README
+- **Criação dos Endpoints:** Contribuí para o desenvolvimento de endpoints RESTful, fornecendo acesso aos dados e funcionalidades da aplicação, e assegurando a correta mapeação de URLs para métodos controladores.
+- **Implementação das Funções:** Participei da escrita de funções no back-end para manipular dados, realizar operações de CRUD e integrar com o banco de dados utilizando JPA.
+
+**Documentação**
+
+- **Responsável pela Construção do README:** Fui responsável pela elaboração da documentação do projeto no README, detalhando a configuração, uso, endpoints da API e outras informações essenciais para desenvolvedores e usuários finais.
+
+**Outras Contribuições**
+
+- **Modelagem do Banco de Dados:** Colaborei na modelagem do banco de dados, definindo entidades, relacionamentos e integridade referencial.
+- **Criação de Entidades:** Participei do desenvolvimento de entidades no back-end, mapeando-as para tabelas do banco de dados e assegurando a correta persistência dos dados.
+- **Otimização de Performance:** Contribuí para a identificação e implementação de otimizações de performance tanto no front-end quanto no back-end, melhorando a eficiência e a resposta da aplicação.
+- **Implementação de Testes:** Ajudei no desenvolvimento de testes unitários e de integração para garantir a confiabilidade e a estabilidade da aplicação.
+- **Suporte e Manutenção:** Ofereci suporte contínuo para a aplicação, corrigindo bugs, implementando novas funcionalidades e melhorando a experiência do usuário.
+
+Essas contribuições foram fundamentais para o sucesso do projeto, garantindo uma aplicação robusta, eficiente e bem documentada.
 
 ##### Lições Aprendidas
 
-Tive diversos aprendizados nesse projeto, foi a primeira vez criando uma API Web e utilizando o spring boot.
+Neste projeto, adquiri diversos aprendizados, especialmente por ser minha primeira experiência criando uma API Web utilizando Spring Boot e desenvolvendo o front-end em TypeScript.
 
-Um grande aprendizado de fato foi a utilização do protocolo `http` para a tranferencia de inform
+**1. Desenvolvimento de API com Spring Boot:**  
+- **Estrutura e Configuração do Projeto:** Aprendi a estruturar um projeto Spring Boot, configurando dependências e entendendo a hierarquia de pastas e arquivos.
+- **Criação de Endpoints:** Compreendi como criar e gerenciar endpoints RESTful, mapeando URLs para métodos controladores.
+- **Manipulação de Dados:** Utilizei JPA para interagir com o banco de dados, incluindo operações de CRUD (Create, Read, Update, Delete).
+- **Protocolo HTTP:** Entendi profundamente o uso do protocolo HTTP para a transferência de informações, incluindo métodos como GET, POST, PUT e DELETE, além do tratamento de códigos de status HTTP.
+
+**2. Desenvolvimento Front-End com TypeScript:**  
+- **Integração com a API:** Aprendi a consumir a API Spring Boot no front-end, utilizando fetch e bibliotecas como Axios para realizar requisições HTTP.
+- **Gerenciamento de Estado:** Utilizei ferramentas de gerenciamento de estado, como Redux ou Context API, para manter a consistência dos dados no front-end.
+- **Componentização:** Criei componentes reutilizáveis em TypeScript, promovendo a modularidade e a manutenção do código.
+- **Tratamento de Erros:** Implementei mecanismos de tratamento de erros para melhorar a experiência do usuário, exibindo mensagens de erro adequadas e lidando com falhas nas requisições.
+
+**3. Boas Práticas e Padrões de Projeto:**  
+- **Testes Unitários e de Integração:** Desenvolvi testes para garantir a funcionalidade e a confiabilidade da aplicação, utilizando frameworks como JUnit e Mockito para o back-end e Jest para o front-end.
+- **Documentação e Comentários:** Aprendi a importância de documentar o código e as APIs, facilitando a manutenção e o entendimento por outros desenvolvedores.
+- **Versionamento de Código:** Utilizei sistemas de controle de versão, como Git, para gerenciar as mudanças no código de forma eficiente e colaborativa.
+
+Esses aprendizados foram fundamentais para o desenvolvimento do projeto e contribuíram significativamente para meu crescimento profissional como desenvolvedor full-stack.
