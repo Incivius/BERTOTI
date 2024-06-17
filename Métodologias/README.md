@@ -21,11 +21,17 @@ Banco de dados: `Postgres`
 
 A aplicação Khali 3 é uma API Java web para o gerenciamento de horas extras e sobreavisos. Seu principal objetivo é controlar os apontamentos/solicitações de horas extras e sobreavisos realizados pelos colaboradores. Além disso, o sistema interpreta essas solicitações, direcionando-as aos responsáveis pela aprovação ou recusa. Caso aprovadas, o sistema realiza cálculos para determinar a quantidade de horas a serem pagas para cada colaborador, com base na parametrização configurada pelo setor de recursos humanos.
 
-### Arquitetura do projeto
-
 ### Funcionalidades
+- Telas para a criação de usuarios. centros de resultados e projetos;
+- Fincionalidade para lançar apontamentos (Horas-extra/sobreaviso);
+- Funcionalidade para a validação (Aprovar ou reprovar) apontamentos;
+- Extração de relatórios de apontamentos;
+- Dashboard a gestão dos apontamentos lançar e validações.
 
 ### Tecnologias utilizadas
+
+#### Back-end: `Java`, `Spring-boot`, `Postgres`, `PG4Admin`, `Postman` e `Docker`
+#### Front-end: `React` e `Typescrpt` 
 
 ### Contribuições Individuais
 
@@ -526,7 +532,7 @@ export async function getReport(
 
 Essas contribuições foram fundamentais para o sucesso do projeto, garantindo uma aplicação robusta, eficiente e bem documentada.
 
-##### Lições Aprendidas
+#### Lições Aprendidas
 
 Neste projeto, adquiri diversos aprendizados, especialmente por ser minha primeira experiência criando uma API Web utilizando Spring Boot e desenvolvendo o front-end em TypeScript.
 
